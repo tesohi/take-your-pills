@@ -20,11 +20,11 @@ export default {
   props: ['value'],
   data: () => ({
     links: [
-      {title: 'Счет', url: '/', exact: true},
-      {title: 'История', url: '/history'},
-      {title: 'Планирование', url: '/planning'},
-      {title: 'Новая запись', url: '/record'},
-      {title: 'Категории', url: '/categories'}
+      {title: 'Напоминания', url: '/', exact: true},
+      {title: 'Заметки', url: '/notes'},
+      {title: 'Препараты и процедуры', url: '/pills'},
+      {title: 'Анализы и обследования', url: '/analyzes'},
+      {title: 'Рекомендации врачей', url: '/recommendations'}
     ]
   })
 }

@@ -23,6 +23,30 @@ const routes = [
     component: () => import('../views/Home.vue')
   },
   {
+    path: '/notes',
+    name: 'Notes',
+    meta: {layout: 'main'},
+    component: () => import('../views/Notes.vue')
+  },
+  {
+    path: '/pills',
+    name: 'Pills',
+    meta: {layout: 'main'},
+    component: () => import('../views/Pills.vue')
+  },
+  {
+    path: '/analyzes',
+    name: 'Analyzes',
+    meta: {layout: 'main'},
+    component: () => import('../views/Analyzes.vue')
+  },
+  {
+    path: '/recommendations',
+    name: 'Recommendations',
+    meta: {layout: 'main'},
+    component: () => import('../views/Recommendations.vue')
+  },
+  {
     path: '/profile',
     name: 'Profile',
     meta: {layout: 'main'},

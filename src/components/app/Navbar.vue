@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar blue">
+  <nav class="navbar my-bg-colour">
       <div class="nav-wrapper">
         <div class="navbar-left">
           <a href="#" @click.prevent="$emit('burger-click')">

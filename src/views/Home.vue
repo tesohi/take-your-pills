@@ -1,6 +1,8 @@
 <template>
   <div>
-    Hello
+    <div class="page-title">
+      <h3>Напоминания</h3>
+    </div>
   </div>
 </template>
 
