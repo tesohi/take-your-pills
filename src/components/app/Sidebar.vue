@@ -9,7 +9,7 @@
       :to="link.url"
       :exact="link.exact"
     >
-      <a href="#" class="waves-effect waves-orange pointer">{{link.title}}</a>
+      <a href="#" class="waves-effect waves-light pointer">{{link.title}}</a>
     </router-link> 
   </ul>
 </template>
@@ -22,6 +22,7 @@ export default {
     links: [
       {title: 'Напоминания', url: '/', exact: true},
       {title: 'Заметки', url: '/notes'},
+      {title: 'Мед данные', url: '/medInfo'},
       {title: 'Препараты и процедуры', url: '/pills'},
       {title: 'Анализы и обследования', url: '/analyzes'},
       {title: 'Рекомендации врачей', url: '/recommendations'}

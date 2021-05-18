@@ -29,6 +29,12 @@ const routes = [
     component: () => import('../views/Notes.vue')
   },
   {
+    path: '/medInfo',
+    name: 'MedInfo',
+    meta: {layout: 'main'},
+    component: () => import('../views/MedInfo.vue')
+  },
+  {
     path: '/pills',
     name: 'Pills',
     meta: {layout: 'main'},
