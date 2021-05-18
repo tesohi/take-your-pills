@@ -24,7 +24,7 @@
     <hr class="line"> -->
 
     <div class="row">
-      <div class="col s8">
+      <div class="col s9">
         <div class="card">
           <div class="card-content">
             
@@ -72,13 +72,19 @@
     <div class="row notes">
       <div class="col s6">
         <div
-          class="card"
+          class="card my-card"
           v-for="note in notes"
           :key="note.id"
         >
           <div class="card-content">
             <span class="card-title">{{note.title}}</span>
             <p>{{note.body}}</p>
+            <div 
+              class="btn-floating btn-small halfway-fab waves-effect waves-light red"
+              @click="deleteNote(note.id)"
+            >
+              <i class="material-icons">delete</i>
+            </div>
           </div>
         </div>
       </div>
@@ -128,6 +134,11 @@ export default {
 
       this.title = ''
       this.body = ''
+    },
+    async deleteNote(noteId) {
+      await this.$store.dispatch("deleteNote", noteId)
+      
+      this.$store.dispatch("fetchNotes") 
     }
   }
 }
@@ -145,5 +156,9 @@ export default {
 
 .notes {
   margin-top: 2rem;
+}
+
+.my-card {
+  margin-top: 1.5rem;
 }
 </style>

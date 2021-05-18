@@ -39,8 +39,14 @@ export default {
         throw e
       }
     },
-    async deleteNote(state, note) {
-      
+    async deleteNote({dispatch, commit}, noteId) {
+      try {
+        const uid = await dispatch('getUid')
+        await firebase.database().ref(`/users/${uid}/notes/${noteId}`).remove() 
+      } catch (e) {
+        commit('setError', e)
+        throw e
+      }
     }
   },
   getters: {

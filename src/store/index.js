@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import auth from './auth'
 import info from './info'
 import notes from './notes'
+import recommendations from './recommendations'
 
 Vue.use(Vuex)
 
@@ -27,6 +28,7 @@ export default new Vuex.Store({
   modules: {
     auth,
     info,
-    notes
+    notes,
+    recommendations
   }
 })
