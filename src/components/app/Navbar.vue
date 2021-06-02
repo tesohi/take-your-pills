@@ -3,9 +3,9 @@
       <div class="nav-wrapper">
         <div class="navbar-left">
           <a href="#" @click.prevent="$emit('burger-click')">
-            <i class="material-icons black-text">dehaze</i>
+            <i class="material-icons white-text">dehaze</i>
           </a>
-          <span class="black-text">{{date | date('datetime')}}</span>
+          <span class="white-text">{{date | date('date')}}</span>
         </div>
 
         <ul class="right hide-on-small-and-down">
@@ -16,8 +16,8 @@
                 data-target="dropdown"
                 ref="dropdown"
             >
-              <strong>{{name}}</strong>
-              <i class="material-icons right">arrow_drop_down</i>
+              <strong class="white-text">{{name}}</strong>
+              <i class="material-icons right white-text">arrow_drop_down</i>
             </a>
 
             <ul id='dropdown' class='dropdown-content'>

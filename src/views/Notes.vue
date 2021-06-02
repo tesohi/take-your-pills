@@ -115,7 +115,6 @@ export default {
   },
   async mounted() {
     this.$store.dispatch("fetchNotes")
-
   },
   methods: {
     async addNote() {

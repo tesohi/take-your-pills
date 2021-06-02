@@ -14,7 +14,7 @@
         </div>
       </main>
 
-      <div class="fixed-action-btn">
+      <div class="fixed-action-btn" v-show="this.$route.name != 'Home'">
         <router-link to="/" class="btn-floating btn-large">
           <i class="large material-icons">add</i>
         </router-link>
