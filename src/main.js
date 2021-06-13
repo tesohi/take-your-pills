@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuelidate from 'vuelidate'
+import Chartkick from 'vue-chartkick'
+import Chart from 'chart.js'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -17,6 +19,7 @@ Vue.config.productionTip = false
 
 Vue.use(messagePlugin)
 Vue.use(Vuelidate)
+Vue.use(Chartkick.use(Chart))
 Vue.filter('date', dateFilter)
 Vue.component('Loader', Loader)
 

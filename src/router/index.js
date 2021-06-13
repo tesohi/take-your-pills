@@ -36,18 +36,6 @@ const routes = [
     component: () => import('../views/MedInfo.vue')
   },
   {
-    path: '/pills',
-    name: 'Pills',
-    meta: {layout: 'main', auth: true},
-    component: () => import('../views/Pills.vue')
-  },
-  {
-    path: '/analyzes',
-    name: 'Analyzes',
-    meta: {layout: 'main', auth: true},
-    component: () => import('../views/Analyzes.vue')
-  },
-  {
     path: '/recommendations',
     name: 'Recommendations',
     meta: {layout: 'main', auth: true},

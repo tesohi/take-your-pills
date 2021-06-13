@@ -5,6 +5,7 @@ import info from './info'
 import notes from './notes'
 import recommendations from './recommendations'
 import reminders from './reminders'
+import medInfo from './medInfo'
 
 Vue.use(Vuex)
 
@@ -31,6 +32,7 @@ export default new Vuex.Store({
     info,
     notes,
     recommendations,
-    reminders
+    reminders,
+    medInfo
   }
 })

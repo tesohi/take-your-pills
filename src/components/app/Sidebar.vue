@@ -23,8 +23,6 @@ export default {
       {title: 'Напоминания', url: '/', exact: true},
       {title: 'Заметки', url: '/notes'},
       {title: 'Мед данные', url: '/medInfo'},
-      {title: 'Препараты и процедуры', url: '/pills'},
-      {title: 'Анализы и обследования', url: '/analyzes'},
       {title: 'Рекомендации врачей', url: '/recommendations'}
     ]
   })
