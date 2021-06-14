@@ -14,9 +14,27 @@
               v-for="reminder in reminders" 
               :key="reminder.id"
             >
-              <div class="card-content">
-                {{reminder.title}}
+              <div class="card-content row">
+                <div class="col s8">
+                  {{reminder.title}}
+                </div>
+                <div class="col s4">
+                  <time
+                    v-for="(t, idx) in reminder.remindersTime" 
+                    :key="idx"
+                  >
+                    {{reminder.remindersTime[idx]}}
+                  </time>
+                </div>
               </div>
+
+              <div 
+                class="btn-floating btn-small my-btn-small halfway-fab waves-effect waves-light red"
+                @click="deleteReminder(reminder.id)"
+              >
+                <i class="material-icons">delete</i>
+              </div>
+
             </div>
 
           </div>
@@ -102,6 +120,8 @@
 </template>
 
 <script>
+import dateFilter from '@/filters/date.filter'
+
 export default {
   name: 'Home',
   data: () => ({
@@ -112,6 +132,8 @@ export default {
     timepicker2: null,
     timepicker3: null,
     timepicker4: null,
+
+    baseReminders: null,
 
     title: '',
 
@@ -132,42 +154,7 @@ export default {
     }
   },
   methods: {
-    async addReminder() {
-      if (this.title === '') {
-        return
-      }
-
-      if (this.timepicker.time) {
-        this.remindersTime.push(this.timepicker.time)
-      }
-      if (this.timepicker2.time) {
-        this.remindersTime.push(this.timepicker2.time)
-      }
-      if (this.timepicker3.time) {
-        this.remindersTime.push(this.timepicker3.time)
-      }
-      if (this.timepicker4.time) {
-        this.remindersTime.push(this.timepicker4.time)
-      }
-
-      await this.$store.dispatch("addReminder", {
-        id: Date.now(),
-        title: this.title,
-        dateOfStart: this.$refs.datepicker.value,
-        amountDays: this.amountDays,
-        timesPerDay: this.selectedAmountTimes,
-        remidersTime: this.remindersTime
-      })
-
-      this.$store.dispatch("fetchReminders") 
-
-      this.title = ''
-    }
-  },
-  async mounted() {
-    this.$store.dispatch("fetchReminders")
-
-    setTimeout(() => {
+    initPickers() {
       this.selectType = M.FormSelect.init(this.$refs.selectType)
       this.datepicker = M.Datepicker.init(this.$refs.datepicker, {
         format: 'dd.mm.yyyy',
@@ -215,30 +202,80 @@ export default {
           done: 'Ок'
         }
       })
-    }, 0)
+      
+    },
+
+    destroyPickers() {
+      if (this.selectType && this.selectType.destroy) {
+        this.selectType.destroy()
+      }
+      if (this.datepicker && this.datepicker.destroy) {
+        this.datepicker.destroy()
+      }
+      if (this.selectAmountTimes && this.selectAmountTimes.destroy) {
+        this.selectAmountTimes.destroy()
+      }
+      if (this.timepicker && this.timepicker.destroy) {
+        this.timepicker.destroy()
+      }
+      if (this.timepicker2 && this.timepicker2.destroy) {
+        this.timepicker2.destroy()
+      }
+      if (this.timepicker3 && this.timepicker3.destroy) {
+        this.timepicker3.destroy()
+      }
+      if (this.timepicker4 && this.timepicker4.destroy) {
+        this.timepicker4.destroy()
+      }
+    },
+
+    async addReminder() {
+      if (this.title === '') {
+        return
+      }
+
+      if (this.timepicker.time) {
+        this.remindersTime.push(this.timepicker.time)
+      }
+      if (this.timepicker2.time) {
+        this.remindersTime.push(this.timepicker2.time)
+      }
+      if (this.timepicker3.time) {
+        this.remindersTime.push(this.timepicker3.time)
+      }
+      if (this.timepicker4.time) {
+        this.remindersTime.push(this.timepicker4.time)
+      }
+
+      await this.$store.dispatch("addReminder", {
+        id: Date.now(),
+        title: this.title,
+        dateOfStart: this.$refs.datepicker.value || new Date().toJSON(),
+        amountDays: this.amountDays,
+        timesPerDay: this.selectedAmountTimes,
+        remindersTime: this.remindersTime
+      })
+
+      this.$store.dispatch("fetchReminders") 
+
+      this.$router.go()
+    },
+
+    async deleteReminder(reminderId) {
+      await this.$store.dispatch("deleteReminder", reminderId)
+      
+      this.$store.dispatch("fetchReminders") 
+    }
+
+  },
+  async mounted() {
+    this.baseReminders = await this.$store.dispatch("fetchReminders")
+
+    this.initPickers()
+
   },
   destroyed() {
-    if (this.selectType && this.selectType.destroy) {
-      this.selectType.destroy()
-    }
-    if (this.datepicker && this.datepicker.destroy) {
-      this.datepicker.destroy()
-    }
-    if (this.selectAmountTimes && this.selectAmountTimes.destroy) {
-      this.selectAmountTimes.destroy()
-    }
-    if (this.timepicker && this.timepicker.destroy) {
-      this.timepicker.destroy()
-    }
-    if (this.timepicker2 && this.timepicker2.destroy) {
-      this.timepicker2.destroy()
-    }
-    if (this.timepicker3 && this.timepicker3.destroy) {
-      this.timepicker3.destroy()
-    }
-    if (this.timepicker4 && this.timepicker4.destroy) {
-      this.timepicker4.destroy()
-    }
+    this.destroyPickers()
   }
 }
 </script>

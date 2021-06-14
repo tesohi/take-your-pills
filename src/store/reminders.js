@@ -21,6 +21,7 @@ export default {
         }
 
         commit('setReminders', remindersArr)
+        return remindersArr
       } catch (e) {
         commit('setError', e)
         throw e
@@ -36,13 +37,23 @@ export default {
           dateOfStart: reminder.dateOfStart,
           amountDays: reminder.amountDays,
           timesPerDay: reminder.timesPerDay,
-          remidersTime: reminder.remidersTime
+          remindersTime: reminder.remindersTime
         })
       } catch (e) {
         commit('setError', e)
         throw e
       }
     },
+
+    async deleteReminder({dispatch, commit}, reminderId) {
+      try {
+        const uid = await dispatch('getUid')
+        await firebase.database().ref(`/users/${uid}/reminders/${reminderId}`).remove() 
+      } catch (e) {
+        commit('setError', e)
+        throw e
+      }
+    }
   },
   getters: {
     reminders: s => s.reminders

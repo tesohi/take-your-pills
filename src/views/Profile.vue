@@ -4,15 +4,14 @@
       <h3>Профиль</h3>
     </div>
 
-    <form class="form">
+    <form class="form" @submit.prevent="submitHandler">
       <div class="input-field">
         <input
-            id="description"
-            type="text"
+          id="description"
+          type="text"
+          v-model="name"
         >
         <label for="description">Имя</label>
-        <span
-              class="helper-text invalid">name</span>
       </div>
 
       <button class="btn waves-effect waves-light" type="submit">
@@ -22,3 +21,27 @@
     </form>
   </div>
 </template>
+
+<script>
+export default {
+  data: () => ({
+    name: ''
+  }),
+  methods: {
+    async submitHandler() {
+      if (this.name === '') {
+        this.$message('Поле не должно быть пустым')
+        return
+      }
+
+      try {
+        await this.$store.dispatch('updateInfo', {name: this.name})
+      } catch (e) {}
+
+      this.name = ''
+
+      this.$message('Выполнено')
+    }
+  }
+}
+</script>
